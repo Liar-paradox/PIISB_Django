@@ -12,23 +12,23 @@ Class-based views
 Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
+# """
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
-# from strona.ocenafilmow import views
+from ocenafilmow import views
 
-#nie działa no module named 'strona.ocenafilmow'
-# router = routers.DefaultRouter()
-# router.register(r'Aktorzy', views.view_actors)
-# router.register(r'Rezyserowie', views.view_directors)
-# router.register(r'Filmy', views.view_film)
-# router.register(r'Oceny', views.view_oceny)
+
+router = routers.DefaultRouter()
+router.register(r'Aktorzy', views.view_actors, basename='Aktorzy')
+router.register(r'Rezyserzy', views.view_directors,basename='Rezyserzy')
+router.register(r'Filmy', views.view_film,basename='Filmy')
+router.register(r'Oceny', views.view_oceny,basename='Oceny')
 
 
 urlpatterns = [
-    # path('',include(router.urls)),
-    path('',include('ocenafilmow.urls')),
+    path('',include(router.urls)),
+    # path('',include('ocenafilmow.urls')),
     path('api-auth/',include('rest_framework.urls')),
     path('admin/', admin.site.urls),
 ]
